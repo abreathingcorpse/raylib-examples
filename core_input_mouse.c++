@@ -53,6 +53,7 @@ int main(void)
             ClearBackground(RAYWHITE);
 
             DrawText("move the ball with WASD keys", 10, 10, 20, DARKGRAY);
+            DrawText("click on the green square", 10, 30, 20, DARKGRAY);
 
             DrawCircleV(ballPosition, 50, MAROON);
             DrawRectangleV(squarePosition, squareSize, squareColor );
