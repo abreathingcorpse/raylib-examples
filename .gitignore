@@ -4,3 +4,4 @@ basic_example
 core_basic_window
 core_input_keys
 core_input_mouse
+core_input_gamepad
