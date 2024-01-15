@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include <iostream>
 
 //------------------------------------------------------------------------------------
 // Program main entry point
@@ -17,6 +18,7 @@ int main(void)
     Vector2 squareSize = { 20.0f, 20.0f };
     Color squareColor = LIME;
     Vector2 mousePosition;
+    float mouseWheelMove;
 
     float elapsed_time; // This will hold the time in seconds for last frame drawn(delta time)
     float unitary_velocity = 200.0f;
@@ -46,6 +48,9 @@ int main(void)
             && mousePosition.y < (squarePosition.y + squareSize.y))
             { squareColor = DARKGREEN; }
 
+        mouseWheelMove = GetMouseWheelMove();
+        squarePosition.y -= mouseWheelMove * 4;
+
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
@@ -54,6 +59,7 @@ int main(void)
 
             DrawText("move the ball with WASD keys", 10, 10, 20, DARKGRAY);
             DrawText("click on the green square", 10, 30, 20, DARKGRAY);
+            DrawText("Use mouse wheel to move the cube up and down!", 10, 50, 20, GRAY);
 
             DrawCircleV(ballPosition, 50, MAROON);
             DrawRectangleV(squarePosition, squareSize, squareColor );
