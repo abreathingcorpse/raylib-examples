@@ -2,7 +2,9 @@
 
 int main(void)
 {
-	InitWindow(800, 450, "raylib [core] example - basic window");
+	int monitor = GetCurrentMonitor();
+	InitWindow(GetMonitorWidth(monitor), GetMonitorHeight(monitor), "raylib [core] example - basic window");
+	ToggleFullscreen();
 	
 	while (!WindowShouldClose())
 	{
