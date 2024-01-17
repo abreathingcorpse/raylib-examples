@@ -1,5 +1,4 @@
 #include "raylib.h"
-#include <iostream>
 
 //------------------------------------------------------------------------------------
 // Program main entry point
@@ -17,8 +16,6 @@ int main(void)
     Vector2 squarePosition = { 600.0f, 250.0f };
     Vector2 squareSize = { 20.0f, 20.0f };
     Color squareColor = LIME;
-    Vector2 mousePosition;
-    float mouseWheelMove;
 
     float elapsed_time; // This will hold the time in seconds for last frame drawn(delta time)
     float unitary_velocity = 200.0f;
