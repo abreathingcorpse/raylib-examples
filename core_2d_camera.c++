@@ -1,4 +1,6 @@
-# include "raylib.h"
+#include "raylib.h"
+#include "raymath.h"
+#include "rlgl.h"
 
 #define MAX_TILES 10
 
@@ -50,8 +52,6 @@ int main(void)
         //----------------------------------------------------------------------------------
         elapsed_time = GetFrameTime();
 
-        // Camera target follows player
-        camera.target = (Vector2){ ballPosition.x, ballPosition.y };
 
         // Camera rotation controls
         if (IsKeyDown(KEY_Q)) {
@@ -67,6 +67,23 @@ int main(void)
         if (camera.zoom > 2.0f) camera.zoom = 2.0f;
         else if (camera.zoom < 0.5f) camera.zoom = 0.5f;
 
+        // Translate based on mouse right click
+        if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+        {
+            Vector2 delta = GetMouseDelta();
+            delta = Vector2Scale(delta, -1.0f/camera.zoom); // It's the inverse, because the camera is being dragged
+
+            camera.target = Vector2Add(camera.target, delta);
+        }
+
+        // Camera reset (zoom, rotation and targets player)
+        if (IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
+        {
+            camera.zoom = 1.0f;
+            camera.rotation = 0.0f;
+            camera.target = (Vector2){ ballPosition.x, ballPosition.y };
+        }
+
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
@@ -79,6 +96,7 @@ int main(void)
                 DrawCircleV(ballPosition, 50, MAROON);
 
             EndMode2D();
+
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
